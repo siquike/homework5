@@ -6,14 +6,13 @@ function [output, act_h, act_a] = Forward(W, b, X)
 % as well as the hidden layer pre activations in 'act_a', and the hidden layer post
 % activations in 'act_h'.
 X = X';
-for i = 1:numel(W)
-    n = size(W{1,i},1);
-    X = repmat(X,n);
-    nw = dot(W{1,i},X,2)+b{1,i};
-    h1 = 1./(1+exp(-nw))
-    out = dot(W{1,i+1},X,2)+b{1,i+1};
-    
-%     exp_nw = exp(nw);
-%     probabilities = exp_nw/sum(exp_nw);
+% for i = 1:numel(W)
+n = size(W{1,1},1);
+X = repmat(X,n);
+act_a = dot(W{1,1},X,2)+b{1,1};
+act_h = 1./(1+exp(-nw));
+output = dot(W{1,2},act_h,2)+b{1,2};
+% exp_nw = exp(nw);
+% probabilities = exp_nw/sum(exp_nw);
 %     Li = -log10(probabilities);
-end
+% end
