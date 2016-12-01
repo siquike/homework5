@@ -5,10 +5,10 @@ function [outputs] = Classify(W, b, data)
 % should return a vector of size DxC of network softmax output probabilities.
 
 for i = 1:size(data,1)
-    [output, act_h, act_a] = Forward(W, b, data(i,:)');
+    [output, act_h, act_a] = Forward(W, b, data(i,:));
     exp_out = exp(output);
-    outputs(i,:) = exp_out/sum(exp_out); 
+    probabilities = exp_out/sum(exp_out); 
+    Li = -log10(probabilities);
 end
-% outputs(i,:) = -log10(probabilities);
 
 end
