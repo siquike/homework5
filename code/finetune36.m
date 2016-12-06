@@ -1,11 +1,11 @@
-num_epoch = 30;
-classes = 26;
+num_epoch = 5;
+classes = 36;
 layers = [32*32, 400, classes];
 learning_rate = 0.01;
 
-load('../data/nist26_train.mat', 'train_data', 'train_labels')
-load('../data/nist26_test.mat', 'test_data', 'test_labels')
-load('../data/nist26_valid.mat', 'valid_data', 'valid_labels')
+load('../data/nist36_train.mat', 'train_data', 'train_labels')
+load('../data/nist36_test.mat', 'test_data', 'test_labels')
+load('../data/nist36_valid.mat', 'valid_data', 'valid_labels')
 
 %%
 [W, b] = InitializeNetwork(layers);
@@ -25,7 +25,7 @@ for j = 1:num_epoch
     fprintf('Epoch %d - accuracy: %.5f, %.5f \t loss: %.5f, %.5f \n', j, train_acc(j), valid_acc(j), train_loss(j), valid_loss(j))
 end
 
-save('nist26_model.mat', 'W', 'b')
+save('nist36_model.mat', 'W', 'b')
 
 %% Plots
 

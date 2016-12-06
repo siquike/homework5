@@ -5,19 +5,20 @@ function [output, act_h, act_a] = Forward(W, b, X)
 % This function should return the final softmax output layer activations in OUT,
 % as well as the hidden layer pre activations in 'act_a', and the hidden layer post
 % activations in 'act_h'.
-X = X';
+% X = X';
 
 %% First Iteration
-n = size(W{1,1},1);
-Xn = repmat(X,n,1);
-act_a{1,1} = dot(W{1,1},Xn,2)+b{1,1};
+% n = size(W{1,1},1);
+% Xn = repmat(X,n,1);
+act_a{1,1} = W{1,1}*X + b{1,1};
 act_h{1,1} = 1./(1+exp(-act_a{1,1}));
 
 %% Deeper Layers
 for i = 2:numel(W)
-    n = size(W{1,i},1);
-    Xn = repmat(X,n,1);
-    act_a{1,i} = dot(W{1,i},act_h{1,i-1},2)+b{1,i};
+%     n = size(W{1,i},1);
+%     Xn = repmat(X,n,1);
+    % Saving the last preactivation and postactivation (doublecheck)
+    act_a{1,i} = W{1,i}*act_h{1,i-1} + b{1,i};
     act_h{1,i} = 1./(1+exp(-act_a{1,i}));
     if i == numel(W)
         output = act_h{1,i};

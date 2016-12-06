@@ -78,13 +78,9 @@ while change == 1
     end
 end
 
-location = [];
 for i = size(lines,1)
-    location =  [location;lines{i}(1,4)];
+     
 end
-
-[~,Idx2] = min(abs(letters(1,4) - location));
-lines{Idx2} = [lines{Idx2}; letters(1,:)];
 
 for i = 1:count3
     [~,Idx2] = sort(lines{i}(:,1));

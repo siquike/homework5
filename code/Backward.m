@@ -6,8 +6,21 @@ function [grad_W, grad_b] = Backward(W, b, X, Y, act_h, act_a)
 %   - 'X' and 'Y' the single input data sample and ground truth output vector,
 %     of sizes Nx1 and Cx1 respectively
 %   - 'act_a' and 'act_h' the network layer pre and post activations when forward
-%     forward propogating the input smaple 'X'
+%     forward propogating the input sample 'X'
 
+n = size(act_h,2);
+dl_da = act_h{1,n} - Y;
 
+for i = n:-1:2
+   grad_W{1,i} = dl_da*act_h{1,i-1}';
+   grad_b{1,i} = dl_da;
+   
+   dl_dh = W{1,i}'*dl_da;
+   dh_da = act_h{1,i-1}.*(1-act_h{i-1});
+   dl_da = dl_dh.*dh_da;
+end
+
+grad_W{1,1} = dl_da*X';
+grad_b{1,1} = dl_da;
 
 end

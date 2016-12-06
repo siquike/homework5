@@ -5,29 +5,28 @@ I2 = imread('../02_letters.jpg');
 I3 = imread('../03_haiku.jpg');
 I4 = imread('../04_deep.jpg');
 
-I = I1;
+I = I3;
 
 
 
 [lines, bw] = findLetters(I);
-% lines
+
 
 % b = [lines{1}(i,1) lines{1}(i,2) lines{1}(i,3)-lines{1}(i,1) lines{1}(i,4)-lines{1}(i,2)]
 
 % I1(lines.PixelIdxList{1,:}) = 0;
-% i = 3;
-
+i = 3;
 hold off
-% figure
+figure
 hold on
 
 imshow(I);
-for j = 1:numel(lines)
-    for i = 1:size(lines{j},1)
-        b = [lines{j}(i,1) lines{j}(i,2) lines{j}(i,3)-lines{j}(i,1) lines{j}(i,4)-lines{j}(i,2)];
-        rectangle('Position',b,'EdgeColor','b')
-    end
+
+for i = 1:size(lines{1},1)
+    b = [lines{1}(i,1) lines{1}(i,2) lines{1}(i,3)-lines{1}(i,1) lines{1}(i,4)-lines{1}(i,2)]
+    rectangle('Position',b,'EdgeColor','b')
 end
+
 % figure
 % imshow(I2);
 % figure

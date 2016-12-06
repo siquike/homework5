@@ -5,7 +5,10 @@ function [accuracy, loss] = ComputeAccuracyAndLoss(W, b, data, labels)
 % the overall accuracy and the average cross-entropy loss.
 nsamples = size(data,1);
 outputs = Classify(W, b, data);
-accuracy = outputs - labels;
-loss = -log10(dot(labels,outputs),2);
+% A(A < 0) = -A(A < 0);
+% accuracy = outputs - labels;
+% accuracy(accuracy < 0) = -accuracy(accuracy < 0);
+accuracy = 1-sum(min(abs(outputs - labels),[],2))/nsamples;
+loss = -log10(dot(labels,outputs,2));
 loss = sum(loss,1)/nsamples;
 
