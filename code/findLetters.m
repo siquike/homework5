@@ -48,6 +48,9 @@ for i = 1:numel(cc.PixelIdxList)
 %    [x2,y2] = ind2sub(n,cc.PixelIdxList{1,i}(end));
    if ((y2 - y1) < 500*n(1)*n(2)/3702370) && ((y2 - y1) > 20*n(1)*n(2)/3702370*.8) && ((x2 - x1) < 500*n(1)*n(2)/3702370) && ((x2 - x1) > 30*n(1)*n(2)/3702370)   
        letters(count,:) = [y1-5 x1-10 y2+5 x2+20];
+%        centerx = round((letters(count,1)+letters(count,3))/2);
+%        centery = round((letters(count,2)+letters(count,4))/2);
+%        letters(count,:) = [centerx-16 centery-16 centerx+16 centery+16];
        count = count + 1;
    end
 end
@@ -91,4 +94,5 @@ for i = 1:count3
     lines{i} = lines{i}(Idx2,:);     
 end
 
+% bw = imcomplement(bw);
 end
