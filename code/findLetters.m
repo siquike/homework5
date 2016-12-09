@@ -94,5 +94,5 @@ for i = 1:count3
     lines{i} = lines{i}(Idx2,:);     
 end
 
-% bw = imcomplement(bw);
+bw = imcomplement(bw);
 end

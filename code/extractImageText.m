@@ -8,6 +8,13 @@ load('../data/nist36_valid.mat', 'valid_data', 'valid_labels')
 
 [lines, bw] = findLetters(fname);
 
+for i = 1:numel(lines)
+    empty = isempty(lines{i});
+end
+lines = lines(~cellfun('isempty',lines));
+
+% newlines = lines{~empty}
+
 data = [];
 
 for j = 1:numel(lines)
@@ -15,14 +22,16 @@ for j = 1:numel(lines)
         temp = bw(lines{j}(i,2):lines{j}(i,4),lines{j}(i,1):lines{j}(i,3));
         
         temp = imrotate(imresize(temp,[32 32]),0);
+%         temp = bwulterode(temp);
 %         imshow(temp)
         temp = temp(:)';
         data(i,:) = temp;
     end
     [outputs{j}] = Classify(W, b, data);
+    data = [];
 end
 tolabel = cell2mat(outputs');
-[~,estimate_labels] = min(tolabel,[],2);
+[~,estimate_labels] = max(tolabel,[],2);
 
 Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
