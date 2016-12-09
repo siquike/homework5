@@ -1,7 +1,7 @@
 num_epoch = 30;
 classes = 26;
 layers = [32*32, 400, classes];
-learning_rate = 0.01;
+learning_rate = 0.001;
 
 load('../data/nist26_train.mat', 'train_data', 'train_labels')
 load('../data/nist26_test.mat', 'test_data', 'test_labels')
@@ -24,7 +24,7 @@ for j = 1:num_epoch
 
     fprintf('Epoch %d - accuracy: %.5f, %.5f \t loss: %.5f, %.5f \n', j, train_acc(j), valid_acc(j), train_loss(j), valid_loss(j))
 end
-
+%%
 save('nist26_model.mat', 'W', 'b')
 
 %% Plots

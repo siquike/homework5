@@ -24,7 +24,7 @@ for j = 1:num_epoch
 
     fprintf('Epoch %d - accuracy: %.5f, %.5f \t loss: %.5f, %.5f \n', j, train_acc(j), valid_acc(j), train_loss(j), valid_loss(j))
 end
-
+%%
 save('nist26_model.mat', 'W', 'b')
 
 %% Plots
@@ -40,25 +40,3 @@ plot(1:num_epoch,train_loss)
 hold on
 plot(1:num_epoch,valid_loss)
 hold off
-
-
-%% Confusion Matrix
-
-load('../data/nist26_train.mat', 'train_data', 'train_labels')
-load('../data/nist26_test.mat', 'test_data', 'test_labels')
-load('../data/nist26_valid.mat', 'valid_data', 'valid_labels')
-load('nist26_model.mat')
-
-labels = ['1';'2';'3'; '4'; '5'; '6'; '7'; '8'; '9'; '10'; '11'; '12'; '13'; '14'; '15'; '16'; '17' '18' '19' '20' '21' '22' '23' '24' '25' '26'];
-labels = cellstr(labels);
-[outputs] = Classify(W, b, valid_data);
-outputs = outputs*10;
-outputs(outputs>0.5) = 1;
-outputs(outputs<=0.5) = 0;
-outputs = uint8(outputs);
-for i = 1:size(outputs,1)
-    estimate_labels{i} = labels(outputs(i,:) == 1);
-    real_labels{i} = labels(valid_labels(i,:) == 1);
-end
-%%
-C = confusionmat(real_labels,estimate_labels)
