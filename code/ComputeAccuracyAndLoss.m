@@ -16,3 +16,4 @@ accuracy = sum(correct)/nsamples;
 loss = -log10(dot(labels,outputs,2));
 loss = sum(loss,1)/nsamples;
 
+end
