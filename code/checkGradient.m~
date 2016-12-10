@@ -24,8 +24,3 @@ for i = 1:numel(W)
     comparison{i} = abs(g_theta{i} - grad_W{i});
     check = (comparison{i} < 1e-6);
     if check
-        disp('Gradient is Correct')
-    else
-        disp('Gradient is Incorrect')
-    end
-end
